@@ -40,9 +40,10 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int icnabout=0x7f020005;
         public static final int icnexit=0x7f020006;
         public static final int icngamestart=0x7f020007;
-        public static final int readme=0x7f020008;
-        public static final int splash=0x7f020009;
-        public static final int splashanimated=0x7f02000a;
+        public static final int launcher=0x7f020008;
+        public static final int readme=0x7f020009;
+        public static final int splash=0x7f02000a;
+        public static final int splashanimated=0x7f02000b;
     }
     public static final class id {
         public static final int TextView01=0x7f0a000f;
