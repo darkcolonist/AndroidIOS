@@ -10,16 +10,17 @@
 
     <TextView
         android:id="@+id/txtHeader"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
+        android:gravity="center"
         android:text="@string/title_activity_basic_info"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <EditText
         android:id="@+id/txtFirstName"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/txtHeader"
         android:layout_below="@+id/txtHeader"
@@ -29,7 +30,7 @@
 
     <EditText
         android:id="@+id/txtLastName"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/txtFirstName"
         android:layout_below="@+id/txtFirstName"
@@ -39,7 +40,7 @@
 
     <EditText
         android:id="@+id/txtEmail"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/txtFirstName"
         android:layout_below="@+id/txtLastName"
@@ -49,7 +50,7 @@
 
     <EditText
         android:id="@+id/txtBirthday"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/txtEmail"
         android:layout_below="@+id/txtEmail"
@@ -62,14 +63,14 @@
 
     <RadioGroup
         android:id="@+id/radioGroupGender"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/editText1"
         android:layout_below="@+id/txtBirthday" >
         
 	    <RadioButton
 	        android:id="@+id/radioMale"
-	        android:layout_width="wrap_content"
+	        android:layout_width="match_parent"
 	        android:layout_height="wrap_content"
 	        android:layout_alignLeft="@+id/txtBirthday"
 	        android:layout_below="@+id/txtBirthday"
@@ -79,20 +80,20 @@
 	
 	    <RadioButton
 	        android:id="@+id/radioFemale"
-	        android:layout_width="wrap_content"
+	        android:layout_width="match_parent"
 	        android:layout_height="wrap_content"
 	        android:layout_alignLeft="@+id/txtBirthday"
 	        android:layout_below="@+id/radioMale"
 	        android:text="Female" />
     </RadioGroup>
-    
+
     <Button
         android:id="@+id/btnSubmit"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignRight="@+id/textView1"
+        android:layout_alignRight="@+id/txtHeader"
         android:layout_below="@+id/radioGroupGender"
         android:onClick="btnSubmitClick"
-        android:text="Submit" />
+        android:text="next" />
 
 </RelativeLayout>

@@ -42,25 +42,26 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int splashanimated=0x7f020007;
     }
     public static final class id {
-        public static final int TextView01=0x7f0a0011;
-        public static final int action_settings=0x7f0a0012;
+        public static final int TextView01=0x7f0a0012;
+        public static final int action_settings=0x7f0a0013;
         public static final int btnSubmit=0x7f0a0009;
-        public static final int btn_clickme=0x7f0a000d;
-        public static final int btn_gropeme=0x7f0a000f;
-        public static final int btn_touchme=0x7f0a000e;
-        public static final int button1=0x7f0a000c;
+        public static final int btn_clickme=0x7f0a000e;
+        public static final int btn_gropeme=0x7f0a0010;
+        public static final int btn_touchme=0x7f0a000f;
+        public static final int button1=0x7f0a000d;
         public static final int editText1=0x7f0a0006;
-        public static final int img_holder=0x7f0a0010;
+        public static final int img_holder=0x7f0a0011;
         public static final int radioFemale=0x7f0a0008;
         public static final int radioGroupGender=0x7f0a0005;
         public static final int radioMale=0x7f0a0007;
-        public static final int textView1=0x7f0a000a;
+        public static final int textView1=0x7f0a000b;
         public static final int txtBirthday=0x7f0a0004;
         public static final int txtEmail=0x7f0a0003;
         public static final int txtFirstName=0x7f0a0001;
         public static final int txtHeader=0x7f0a0000;
         public static final int txtLastName=0x7f0a0002;
-        public static final int txt_yourname=0x7f0a000b;
+        public static final int txtWelcome=0x7f0a000a;
+        public static final int txt_yourname=0x7f0a000c;
     }
     public static final class layout {
         public static final int activity_basic_info=0x7f030000;
@@ -77,6 +78,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
     }
     public static final class raw {
         public static final int readme=0x7f040000;
+        public static final int win95=0x7f040001;
     }
     public static final class string {
         public static final int action_settings=0x7f070001;

@@ -27,8 +27,8 @@ public class SplashActivity extends Activity {
 
 		setContentView(R.layout.activity_splash);
 
-//		splashMusic = MediaPlayer.create(this, R.raw.splash);
-//		splashMusic.start();
+		splashMusic = MediaPlayer.create(this, R.raw.win95);
+		splashMusic.start();
 		
 		Thread timer = new Thread(){
 			public void run(){
@@ -51,7 +51,7 @@ public class SplashActivity extends Activity {
 	protected void onPause() {
 		// TODO Auto-generated method stub
 		super.onPause();
-		// splashMusic.release();
+		splashMusic.release();
 		finish();
 	}
 }

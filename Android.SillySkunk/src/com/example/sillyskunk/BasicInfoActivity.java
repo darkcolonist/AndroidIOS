@@ -2,6 +2,7 @@ package com.example.sillyskunk;
 
 import android.os.Bundle;
 import android.app.Activity;
+import android.content.Intent;
 import android.view.Menu;
 import android.view.View;
 import android.widget.TextView;
@@ -50,8 +51,60 @@ public class BasicInfoActivity extends Activity {
 			Toast.makeText(this, "there are some errors found in your information, please review the information first!", Toast.LENGTH_LONG).show();
 		}else{
 			Toast.makeText(this, "thank you, "+ txtFirstName.getText() +"!", Toast.LENGTH_LONG).show();
+			
+			UserInfo ui = new UserInfo(txtFirstName.getText().toString()
+					, txtLastName.getText().toString()
+					, txtEmail.getText().toString()
+					, txtBirthday.getText().toString()
+					, "male");
+			
+			loadNextScreen(ui);
 		}
 		
 	}
+	
+	private void loadNextScreen(final UserInfo ui){		
+		Thread timer = new Thread(){
+			public void run(){
+				try{
+					sleep(1000);
+				}catch(InterruptedException e){
+					e.printStackTrace();
+				}finally{
+					Intent openActivity = new Intent("com.example.sillyskunk.BASICINFOSUMMARY");
+					
+					Bundle bundle = new Bundle();
+					
+					bundle.putString("firstName", ui.firstName);
+					bundle.putString("lastName", ui.lastName);
+					bundle.putString("email", ui.email);
+					bundle.putString("birthday", ui.birthday);
+					bundle.putString("gender", ui.gender);
+					
+					openActivity.putExtras(bundle);
+					startActivity(openActivity);
+				}
+			}
+		};
+		
+		timer.start();
+	}
 
 }
+
+class UserInfo{
+	String firstName;
+	String lastName;
+	String email;
+	String birthday;
+	String gender;
+	
+	public UserInfo(String firstName, String lastName, String email, String birthday, String gender){
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.email = email;
+		this.birthday = birthday;
+		this.gender = gender;
+	}
+}
+

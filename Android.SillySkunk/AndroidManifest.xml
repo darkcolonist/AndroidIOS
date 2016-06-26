@@ -32,12 +32,14 @@
         <activity
             android:name="com.example.sillyskunk.BasicInfoSummaryActivity"
             android:label="@string/title_activity_basic_info_summary" >
+            <intent-filter>
+                <action android:name="com.example.sillyskunk.BASICINFOSUMMARY" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
         </activity>
         <activity
             android:name="com.example.sillyskunk.SplashActivity"
-            android:configChanges="orientation|keyboardHidden|screenSize"
-            android:label="@string/title_activity_splash"
-            android:theme="@style/FullscreenTheme" >
+            android:label="@string/title_activity_splash">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
