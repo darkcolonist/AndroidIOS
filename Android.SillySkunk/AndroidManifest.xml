@@ -31,6 +31,20 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name="com.example.sillyskunk.BasicInfoSummaryActivity"
+            android:label="@string/title_activity_basic_info_summary" >
+        </activity>
+        <activity
+            android:name="com.example.sillyskunk.SplashActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="@string/title_activity_splash"
+            android:theme="@style/FullscreenTheme" >
+        </activity>
+        <activity
+            android:name="com.example.sillyskunk.DebugMenuActivity"
+            android:label="@string/title_activity_debug_menu" >
+        </activity>
     </application>
 
 </manifest>

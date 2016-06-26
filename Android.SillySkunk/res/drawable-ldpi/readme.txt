@@ -1,0 +1,1 @@
+drawable-ldpi images go here

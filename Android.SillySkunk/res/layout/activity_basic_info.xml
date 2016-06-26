@@ -9,7 +9,7 @@
     tools:context=".BasicInfoActivity" >
 
     <TextView
-        android:id="@+id/textView1"
+        android:id="@+id/txtHeader"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
@@ -21,8 +21,8 @@
         android:id="@+id/txtFirstName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/textView1"
-        android:layout_below="@+id/textView1"
+        android:layout_alignLeft="@+id/txtHeader"
+        android:layout_below="@+id/txtHeader"
         android:ems="10"
         android:hint="first name"
         android:inputType="textPersonName" />
