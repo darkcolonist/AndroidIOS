@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">SillySkunk</string>
+    <string name="action_settings">Settings</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="welcome">Welcome!</string>
+    <string name="enter_name">Your name here</string>
+    <string name="txt_continue">Continue</string>
+    <string name="btn_clickme">Click Me</string>
+    <string name="btn_touchme">Touch Me</string>
+    <string name="btn_gropeme">Grope Me</string>
+    <string name="title_activity_basic_info">Le Your Info Are Belong to Us</string>
+
+</resources>

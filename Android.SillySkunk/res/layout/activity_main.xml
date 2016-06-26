@@ -1,0 +1,77 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context=".MainActivity" >
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/welcome" />
+
+    <EditText
+        android:id="@+id/txt_yourname"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/textView1"
+        android:layout_below="@+id/textView1"
+        android:ems="10"
+        android:hint="@string/enter_name"
+        android:inputType="textPersonName" >
+
+        <requestFocus />
+    </EditText>
+
+    <Button
+        android:id="@+id/button1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:text="@string/txt_continue" />
+
+    <Button
+        android:id="@+id/btn_clickme"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/txt_yourname"
+        android:layout_below="@+id/txt_yourname"
+        android:layout_marginTop="58dp"
+        android:text="@string/btn_clickme"
+        android:onClick="onClickMeClick" />
+
+    <Button
+        android:id="@+id/btn_touchme"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/txt_yourname"
+        android:layout_below="@+id/txt_yourname"
+        android:layout_marginTop="117dp"
+        android:text="@string/btn_touchme"
+        android:onClick="onTouchMeClick" />
+
+    <Button
+        android:id="@+id/btn_gropeme"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/btn_clickme"
+        android:layout_below="@+id/btn_clickme"
+        android:layout_marginTop="71dp"
+        android:text="@string/btn_gropeme"
+        android:onClick="onGropeMeClick" />
+
+    <ImageView
+        android:id="@+id/img_holder"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@+id/button1"
+        android:layout_alignTop="@+id/btn_clickme"
+        android:layout_marginRight="15dp"
+        android:src="@drawable/cutegirl000" />
+
+</RelativeLayout>
