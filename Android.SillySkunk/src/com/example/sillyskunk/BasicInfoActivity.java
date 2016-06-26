@@ -1,5 +1,8 @@
 package com.example.sillyskunk;
 
+import com.example.sillyskunk.lib.DBHelper;
+import com.example.sillyskunk.models.Profile;
+
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
@@ -52,18 +55,20 @@ public class BasicInfoActivity extends Activity {
 		}else{
 			Toast.makeText(this, "thank you, "+ txtFirstName.getText() +"!", Toast.LENGTH_LONG).show();
 			
-			UserInfo ui = new UserInfo(txtFirstName.getText().toString()
+			Profile prof = new Profile(txtFirstName.getText().toString()
 					, txtLastName.getText().toString()
 					, txtEmail.getText().toString()
 					, txtBirthday.getText().toString()
 					, "male");
 			
-			loadNextScreen(ui);
+			loadNextScreen(prof);
 		}
 		
 	}
 	
-	private void loadNextScreen(final UserInfo ui){		
+	private void loadNextScreen(final Profile prof){
+		final BasicInfoActivity theUltimateBasicInfoActivityHandler = this;
+		
 		Thread timer = new Thread(){
 			public void run(){
 				try{
@@ -75,11 +80,14 @@ public class BasicInfoActivity extends Activity {
 					
 					Bundle bundle = new Bundle();
 					
-					bundle.putString("firstName", ui.firstName);
-					bundle.putString("lastName", ui.lastName);
-					bundle.putString("email", ui.email);
-					bundle.putString("birthday", ui.birthday);
-					bundle.putString("gender", ui.gender);
+					bundle.putString("firstName", prof.firstName);
+					bundle.putString("lastName", prof.lastName);
+					bundle.putString("email", prof.email);
+					bundle.putString("birthday", prof.birthday);
+					bundle.putString("gender", prof.gender);
+				
+					DBHelper db = new DBHelper(theUltimateBasicInfoActivityHandler);
+					db.addProfile(prof);
 					
 					openActivity.putExtras(bundle);
 					startActivity(openActivity);
@@ -90,21 +98,5 @@ public class BasicInfoActivity extends Activity {
 		timer.start();
 	}
 
-}
-
-class UserInfo{
-	String firstName;
-	String lastName;
-	String email;
-	String birthday;
-	String gender;
-	
-	public UserInfo(String firstName, String lastName, String email, String birthday, String gender){
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.email = email;
-		this.birthday = birthday;
-		this.gender = gender;
-	}
 }
 
