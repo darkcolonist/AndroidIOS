@@ -37,31 +37,38 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int cutegirl002=0x7f020002;
         public static final int cutegirl003=0x7f020003;
         public static final int ic_launcher=0x7f020004;
-        public static final int readme=0x7f020005;
-        public static final int splash=0x7f020006;
-        public static final int splashanimated=0x7f020007;
+        public static final int icnabout=0x7f020005;
+        public static final int icnexit=0x7f020006;
+        public static final int icngamestart=0x7f020007;
+        public static final int readme=0x7f020008;
+        public static final int splash=0x7f020009;
+        public static final int splashanimated=0x7f02000a;
     }
     public static final class id {
-        public static final int TextView01=0x7f0a0012;
-        public static final int action_settings=0x7f0a0013;
+        public static final int TextView01=0x7f0a000f;
+        public static final int TextView02=0x7f0a000e;
+        public static final int action_settings=0x7f0a0017;
+        public static final int btnAbout=0x7f0a000c;
+        public static final int btnExit=0x7f0a000d;
+        public static final int btnStart=0x7f0a000b;
         public static final int btnSubmit=0x7f0a0009;
-        public static final int btn_clickme=0x7f0a000e;
-        public static final int btn_gropeme=0x7f0a0010;
-        public static final int btn_touchme=0x7f0a000f;
-        public static final int button1=0x7f0a000d;
+        public static final int btn_clickme=0x7f0a0013;
+        public static final int btn_gropeme=0x7f0a0015;
+        public static final int btn_touchme=0x7f0a0014;
+        public static final int button1=0x7f0a0012;
         public static final int editText1=0x7f0a0006;
-        public static final int img_holder=0x7f0a0011;
+        public static final int img_holder=0x7f0a0016;
         public static final int radioFemale=0x7f0a0008;
         public static final int radioGroupGender=0x7f0a0005;
         public static final int radioMale=0x7f0a0007;
-        public static final int textView1=0x7f0a000b;
+        public static final int textView1=0x7f0a0010;
         public static final int txtBirthday=0x7f0a0004;
         public static final int txtEmail=0x7f0a0003;
         public static final int txtFirstName=0x7f0a0001;
         public static final int txtHeader=0x7f0a0000;
         public static final int txtLastName=0x7f0a0002;
         public static final int txtWelcome=0x7f0a000a;
-        public static final int txt_yourname=0x7f0a000c;
+        public static final int txt_yourname=0x7f0a0011;
     }
     public static final class layout {
         public static final int activity_basic_info=0x7f030000;

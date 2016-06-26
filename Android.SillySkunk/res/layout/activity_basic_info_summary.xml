@@ -14,4 +14,74 @@
         android:layout_height="wrap_content"
         android:text="hello %s" />
 
+    <ImageButton
+        android:id="@+id/btnStart"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:layout_alignLeft="@+id/txtWelcome"
+        android:layout_below="@+id/txtWelcome"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="25dp"
+        android:onClick="btnStartClick"
+        android:src="@drawable/icngamestart" />
+    <ImageButton
+        android:id="@+id/btnAbout"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:layout_alignLeft="@+id/txtWelcome"
+        android:layout_below="@+id/btnStart"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="25dp"
+        android:onClick="btnAboutClick"
+        android:src="@drawable/icnabout" />
+    <ImageButton
+        android:id="@+id/btnExit"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:layout_alignLeft="@+id/txtWelcome"
+        android:layout_below="@+id/btnAbout"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="25dp"
+        android:onClick="btnExitClick"
+        android:src="@drawable/icnexit" />
+
+    <TextView
+        android:id="@+id/TextView02"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/btnExit"
+        android:layout_alignParentRight="true"
+        android:layout_alignTop="@+id/btnExit"
+        android:layout_toRightOf="@+id/btnExit"
+        android:gravity="center_vertical"
+        android:text="Exit"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="#444" />
+
+    <TextView
+        android:id="@+id/TextView01"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/btnAbout"
+        android:layout_alignLeft="@+id/TextView02"
+        android:layout_alignParentRight="true"
+        android:layout_alignTop="@+id/btnAbout"
+        android:gravity="center_vertical"
+        android:text="About"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="#444" />
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/btnAbout"
+        android:layout_alignLeft="@+id/TextView01"
+        android:layout_alignParentRight="true"
+        android:layout_alignTop="@+id/btnStart"
+        android:gravity="center_vertical"
+        android:text="Start Game"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="#444" />
+
 </RelativeLayout>
