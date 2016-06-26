@@ -39,18 +39,17 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int ic_launcher=0x7f020004;
         public static final int readme=0x7f020005;
         public static final int splash=0x7f020006;
+        public static final int splashanimated=0x7f020007;
     }
     public static final class id {
-        public static final int action_settings=0x7f0a0014;
+        public static final int TextView01=0x7f0a0011;
+        public static final int action_settings=0x7f0a0012;
         public static final int btnSubmit=0x7f0a0009;
         public static final int btn_clickme=0x7f0a000d;
         public static final int btn_gropeme=0x7f0a000f;
         public static final int btn_touchme=0x7f0a000e;
         public static final int button1=0x7f0a000c;
-        public static final int dummy_button=0x7f0a0013;
         public static final int editText1=0x7f0a0006;
-        public static final int fullscreen_content=0x7f0a0011;
-        public static final int fullscreen_content_controls=0x7f0a0012;
         public static final int img_holder=0x7f0a0010;
         public static final int radioFemale=0x7f0a0008;
         public static final int radioGroupGender=0x7f0a0005;

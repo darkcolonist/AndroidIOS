@@ -37,7 +37,7 @@ public class SplashActivity extends Activity {
 				}catch(InterruptedException e){
 					e.printStackTrace();
 				}finally{
-					Intent openActivity = new Intent("android.intent.action.MAIN");
+					Intent openActivity = new Intent("com.example.sillyskunk.BASICINFO");
 					startActivity(openActivity);
 				}
 			}
@@ -51,7 +51,7 @@ public class SplashActivity extends Activity {
 	protected void onPause() {
 		// TODO Auto-generated method stub
 		super.onPause();
-		splashMusic.release();
+		// splashMusic.release();
 		finish();
 	}
 }

@@ -35,6 +35,8 @@ public class DebugMenuActivity extends ListActivity {
 			Class theClass = Class.forName("com.example.newpracticeandroid."+classlist);
 			Intent theIntent = new Intent(DebugMenuActivity.this, theClass);
 			startActivity(theIntent);
+		}catch(ClassNotFoundException e){
+			e.printStackTrace();
 		}
 	}
 
