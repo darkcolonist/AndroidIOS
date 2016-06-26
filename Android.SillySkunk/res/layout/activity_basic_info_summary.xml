@@ -25,11 +25,21 @@
         android:onClick="btnStartClick"
         android:src="@drawable/icngamestart" />
     <ImageButton
-        android:id="@+id/btnAbout"
+        android:id="@+id/btnList"
         android:layout_width="75dp"
         android:layout_height="75dp"
         android:layout_alignLeft="@+id/txtWelcome"
         android:layout_below="@+id/btnStart"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="25dp"
+        android:onClick="btnListClick"
+        android:src="@drawable/icnlist" />
+    <ImageButton
+        android:id="@+id/btnAbout"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:layout_alignLeft="@+id/txtWelcome"
+        android:layout_below="@+id/btnList"
         android:layout_marginLeft="20dp"
         android:layout_marginTop="25dp"
         android:onClick="btnAboutClick"
@@ -56,6 +66,7 @@
         android:gravity="center_vertical"
         android:text="Exit"
         android:textAppearance="?android:attr/textAppearanceLarge"
+        android:onClick="btnExitClick"
         android:textColor="#444" />
 
     <TextView
@@ -69,19 +80,35 @@
         android:gravity="center_vertical"
         android:text="About"
         android:textAppearance="?android:attr/textAppearanceLarge"
+        android:onClick="btnAboutClick"
         android:textColor="#444" />
 
     <TextView
         android:id="@+id/textView1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/btnAbout"
+        android:layout_above="@+id/btnList"
         android:layout_alignLeft="@+id/TextView01"
         android:layout_alignParentRight="true"
         android:layout_alignTop="@+id/btnStart"
         android:gravity="center_vertical"
         android:text="Start Game"
         android:textAppearance="?android:attr/textAppearanceLarge"
+        android:onClick="btnStartClick"
+        android:textColor="#444" />
+
+    <TextView
+        android:id="@+id/TextView03"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/btnList"
+        android:layout_alignLeft="@+id/textView1"
+        android:layout_alignRight="@+id/TextView01"
+        android:layout_alignTop="@+id/btnList"
+        android:gravity="center_vertical"
+        android:text="Profile List"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:onClick="btnListClick"
         android:textColor="#444" />
 
 </RelativeLayout>
