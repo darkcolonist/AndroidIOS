@@ -69,7 +69,12 @@ public class UserActivity extends Activity {
 	}
 	
 	public void btnHistoryClick(View v){
-		
+		Bundle bundle = new Bundle();
+		bundle.putString("username", username);
+		Intent openActivity = new Intent(
+				"android.intent.action.USERHISTORY");
+		openActivity.putExtras(bundle);
+		startActivityForResult(openActivity, 1);
 	}
 	
 	public void btnLogoutClick(View v){

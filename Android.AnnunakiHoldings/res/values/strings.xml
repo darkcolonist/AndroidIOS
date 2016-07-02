@@ -10,5 +10,6 @@
     <string name="title_activity_admin_edit_user_acivity">View User</string>
     <string name="title_activity_user">User</string>
     <string name="title_activity_user_transfer">Transfer Funds</string>
+    <string name="title_activity_user_history">Transactions History</string>
 
 </resources>

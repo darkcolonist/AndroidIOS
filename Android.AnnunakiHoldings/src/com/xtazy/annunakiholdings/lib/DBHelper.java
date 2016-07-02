@@ -321,7 +321,7 @@ public class DBHelper extends SQLiteOpenHelper {
             	
             	user = this.fetchUserFromCursor(cursor);
             	
-                // Adding contact to list
+                // Adding to list
             	usernames.add(user.username);
             } while (cursor.moveToNext());
         }
@@ -329,8 +329,65 @@ public class DBHelper extends SQLiteOpenHelper {
         String[] usernamesArr = new String[usernames.size()];
         usernames.toArray(usernamesArr);
         
-        // return contact list
+        // return list
         return usernamesArr;
+    }
+    
+
+    public String[] getTransactionStrArray(String username){
+    	List<String> transactions = new ArrayList<String>();
+        // Select All Query
+    	String statement = "SELECT * FROM " + TABLE_TRANSACTIONS + 
+    			" WHERE `uFrom` = '"+username+"'" +
+    			"   OR `uTo` = '"+username+"'" +
+        		" ORDER BY `uDate` DESC" +
+        		";";
+ 
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(statement, null);
+ 
+        // looping through all rows and adding to list
+        if (cursor.moveToFirst()) {
+            do {
+            	User user = new User();
+            	
+//            	+ "`id` INTEGER PRIMARY KEY," 0 
+//                + " `uFrom` INTEGER,"       1
+//                + " `uTo` INTEGER,"         2
+//                + " `uAmount` TEXT,"        3
+//                + " `uDate` TEXT"           4
+            	
+            	String from = cursor.getString(1);
+            	String to = cursor.getString(2);
+            	String amount = cursor.getString(3);
+            	String date = cursor.getString(4);
+            	
+            	String rowString = "";
+            	if(from.equalsIgnoreCase(username)){
+            		rowString = "["+date+"] gave " + amount + " to " + to; 
+            	}else{
+            		rowString = "["+date+"] received " + amount + " from " + from;
+            	}
+            	
+                // Adding to list
+            	transactions.add(rowString);
+            } while (cursor.moveToNext());
+        }
+ 
+        String[] transactionsArr;
+        
+        if(transactions.size() == 0){
+        	transactionsArr = new String[1];
+        	transactions.add("no transactions yet");
+        	transactions.toArray(transactionsArr);
+        }else{        	
+        	transactionsArr = new String[transactions.size()];
+        	transactions.toArray(transactionsArr);
+        }
+        
+        
+        // return list
+        return transactionsArr;
     }
     
     public void addTransaction(

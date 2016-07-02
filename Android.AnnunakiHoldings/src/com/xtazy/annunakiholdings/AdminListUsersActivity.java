@@ -39,8 +39,6 @@ public class AdminListUsersActivity extends Activity {
 	}
 
 	public void refreshList() {
-		Log.v("xtazy.message", "list refreshed...");
-
 		lstUsers = (ListView) findViewById(R.id.lstUsers);
 
 		// Defined Array values to show in ListView
