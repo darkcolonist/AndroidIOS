@@ -84,13 +84,15 @@ public class AdminListUsersActivity extends Activity {
 				String itemValue = (String) lstUsers
 						.getItemAtPosition(position);
 
-				// load activity: android.intent.action.ADMINEDITUSER
-				Bundle bundle = new Bundle();
-				bundle.putString("username", itemValue);
-				Intent openActivity = new Intent(
-						"android.intent.action.ADMINEDITUSER");
-				openActivity.putExtras(bundle);
-				startActivityForResult(openActivity, 1);
+				if(!itemValue.equalsIgnoreCase("no users yet")){					
+					// load activity: android.intent.action.ADMINEDITUSER
+					Bundle bundle = new Bundle();
+					bundle.putString("username", itemValue);
+					Intent openActivity = new Intent(
+							"android.intent.action.ADMINEDITUSER");
+					openActivity.putExtras(bundle);
+					startActivityForResult(openActivity, 1);
+				}
 			}
 
 		});

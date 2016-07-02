@@ -308,7 +308,8 @@ public class DBHelper extends SQLiteOpenHelper {
     	List<String> usernames = new ArrayList<String>();
         // Select All Query
     	String statement = "SELECT * FROM " + TABLE_USERS + 
-        		" WHERE `role` <> 'admin'" +
+    			" WHERE `role` <> 'admin'" +
+        		" ORDER BY `username`" +
         		";";
  
         SQLiteDatabase db = this.getWritableDatabase();
@@ -326,8 +327,17 @@ public class DBHelper extends SQLiteOpenHelper {
             } while (cursor.moveToNext());
         }
  
-        String[] usernamesArr = new String[usernames.size()];
-        usernames.toArray(usernamesArr);
+        String[] usernamesArr;
+        
+        if(usernames.size() == 0){
+        	usernamesArr = new String[1];
+        	usernames.add("no users yet");
+        	usernames.toArray(usernamesArr);
+        }else{        	
+        	usernamesArr = new String[usernames.size()];
+        	usernames.toArray(usernamesArr);
+        }
+        
         
         // return list
         return usernamesArr;

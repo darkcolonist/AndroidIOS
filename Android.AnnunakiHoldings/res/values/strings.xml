@@ -11,5 +11,8 @@
     <string name="title_activity_user">User</string>
     <string name="title_activity_user_transfer">Transfer Funds</string>
     <string name="title_activity_user_history">Transactions History</string>
+    <string name="title_activity_splash">Annunaki Holdings</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
 
 </resources>

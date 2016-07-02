@@ -6,6 +6,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
+    android:background="@drawable/bg"
     tools:context="com.xtazy.annunakiholdings.AdminCreateUserActivity" >
 
     <EditText
@@ -79,7 +80,7 @@
         android:layout_below="@+id/txtGender"
         android:ems="10"
         android:hint="account balance ie., 1000.00"
-        android:inputType="text" />
+        android:inputType="number" />
 
     <Button
         android:id="@+id/btnSave"

@@ -91,7 +91,7 @@ public class UserTransferActivity extends Activity {
 			
 			if(!android.text.TextUtils.isDigitsOnly(amount) ||
 					Double.parseDouble(amount) <= 0){
-				txtAmount.setError("must be a positive number!");
+				txtAmount.setError("must be a positive non-zero number!");
 				hasError = true;
 			}
 			
