@@ -51,6 +51,7 @@ public class AdminCreateUserActivity extends Activity {
 		String email = ((TextView) findViewById(R.id.txtEmail)).getText().toString();
 		String gender = ((TextView) findViewById(R.id.txtGender)).getText().toString();
 		String balance = ((TextView) findViewById(R.id.txtBalance)).getText().toString();
+		String status = "active"; // when creating a user, s/he must always be active!
 		String role = "user"; // because admin cannot create other admins!
 		
 		boolean hasError = false;
@@ -74,7 +75,7 @@ public class AdminCreateUserActivity extends Activity {
 		
 		if(!hasError){			
 			
-			db.addUser(username, password, firstName, lastName, email, gender, role, balance);
+			db.addUser(username, password, firstName, lastName, email, gender, role, balance, status);
 			
 			Toast.makeText(this, "new account: "+username, Toast.LENGTH_SHORT).show();
 			this.finish();

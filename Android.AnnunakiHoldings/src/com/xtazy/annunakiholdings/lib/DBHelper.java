@@ -19,7 +19,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
 	// All Static variables
     // Database Version
-    private static final int DATABASE_VERSION = 6;
+    private static final int DATABASE_VERSION = 8;
  
     // Database Name
     private static final String DATABASE_NAME = "dbAnnunakiHoldings";
@@ -46,7 +46,8 @@ public class DBHelper extends SQLiteOpenHelper {
                 + " `email` TEXT,"
                 + " `gender` TEXT," 
                 + " `role` TEXT,"
-                + " `balance` TEXT"
+                + " `balance` TEXT,"
+                + " `status` TEXT"
                 + ")";
         db.execSQL(statement);
         
@@ -63,23 +64,27 @@ public class DBHelper extends SQLiteOpenHelper {
     }
  
     private void setupDefaultUsers(SQLiteDatabase db) {
-    	String columns = "(username, password, firstName, lastName, email, gender, role, balance)";
+    	String columns = "(username, password, firstName, lastName, email, gender, role, balance, status)";
     	String statement;
     	statement = "INSERT INTO `"+TABLE_USERS+"`"
 		  + " " + columns
-		  + " VALUES('admin', '2016', 'The True', 'Annunaki', 'cris@nms.ph', 'male', 'admin', '-1');";
+		  + " VALUES('admin', '2016', 'The True', 'Annunaki', 'cris@nms.ph', 'male', 'admin', '-1', 'active');";
 		db.execSQL(statement);
 		statement = "INSERT INTO `"+TABLE_USERS+"`"
 		  + " " + columns
-		  + " VALUES('acct1', '1122', 'Account 1', 'Holder', 'acct1@mailinator.com', 'male', 'user', '5000');";
+		  + " VALUES('acct1', '1122', 'Account 1', 'Holder', 'acct1@mailinator.com', 'male', 'user', '5000', 'active');";
 		db.execSQL(statement);
 		statement = "INSERT INTO `"+TABLE_USERS+"`"
 		  + " " + columns
-		  + " VALUES('acct2', '1122', 'Account 2', 'Holder', 'acct2@mailinator.com', 'female', 'user', '5000');";
+		  + " VALUES('acct2', '1122', 'Account 2', 'Holder', 'acct2@mailinator.com', 'female', 'user', '5000', 'active');";
 		db.execSQL(statement);
 		statement = "INSERT INTO `"+TABLE_USERS+"`"
 		  + " " + columns
-		  + " VALUES('acct3', '1122', 'Account 3', 'Holder', 'acct3@mailinator.com', 'female', 'user', '5000');";
+		  + " VALUES('acct3', '1122', 'Account 3', 'Holder', 'acct3@mailinator.com', 'female', 'user', '5000', 'active');";
+		db.execSQL(statement);
+		statement = "INSERT INTO `"+TABLE_USERS+"`"
+		  + " " + columns
+		  + " VALUES('acct4', '1122', 'Account 4', 'Holder', 'acct4@mailinator.com', 'female', 'user', '5000', 'inactive');";
 		db.execSQL(statement);
 	}
 
@@ -102,7 +107,8 @@ public class DBHelper extends SQLiteOpenHelper {
     		String email,
     		String gender,
     		String role,
-    		String balance) {
+    		String balance,
+    		String status) {
         SQLiteDatabase db = this.getWritableDatabase();
      
         ContentValues values = new ContentValues();
@@ -114,6 +120,7 @@ public class DBHelper extends SQLiteOpenHelper {
         values.put("gender", gender);
         values.put("role", role);
         values.put("balance", balance);
+        values.put("status", status);
      
         // Inserting Row
         db.insert(TABLE_USERS, null, values);
@@ -142,6 +149,8 @@ public class DBHelper extends SQLiteOpenHelper {
             	user.email = cursor.getString(5);
             	user.gender = cursor.getString(6);
             	user.role = cursor.getString(7);
+            	user.balance = cursor.getString(8);
+            	user.status = cursor.getString(9);
             } while (cursor.moveToNext());
         }
     	
@@ -171,6 +180,8 @@ public class DBHelper extends SQLiteOpenHelper {
             	user.email = cursor.getString(5);
             	user.gender = cursor.getString(6);
             	user.role = cursor.getString(7);
+            	user.balance = cursor.getString(8);
+            	user.status = cursor.getString(9);
             } while (cursor.moveToNext());
         }
     	

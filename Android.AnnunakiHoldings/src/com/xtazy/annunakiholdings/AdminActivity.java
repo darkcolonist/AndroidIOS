@@ -40,12 +40,12 @@ public class AdminActivity extends Activity {
 	}
 	
 	public void btnListClick(View v){
-		Log.v("xtazy.message", "clicked list");
+		Intent openActivity = new Intent("android.intent.action.ADMINLISTUSERS");
+		startActivity(openActivity);
 	}
 	
 	public void btnCreateClick(View v){
 		Intent openActivity = new Intent("android.intent.action.ADMINCREATEUSER");
-//		openActivity.putExtras(bundle);
 		startActivity(openActivity);
 	}
 }

@@ -28,15 +28,31 @@ public class LoginActivity extends Activity {
     	String username = txtUsername.getText().toString();
     	String password = txtPassword.getText().toString();
     	
+    	Boolean hasError = false;
+    	if(username.isEmpty()){
+    		txtUsername.setError("this field cannot be empty!");
+    		hasError = true;
+    	}
+    	
+    	if(password.isEmpty()){
+    		txtPassword.setError("this field cannot be empty!");
+    		hasError = true;
+    	}
+    	
+    	if(hasError)
+    		return;
+    	
     	DBHelper db = new DBHelper(this);
     	User user = db.getUser(username, password);
     	
-    	txtUsername.setText("");
-    	txtPassword.setText("");
-    	
     	if(user.id == -1){
     		Toast.makeText(this, "invalid login credentials!", Toast.LENGTH_LONG).show();
+    	}else if(!user.status.equalsIgnoreCase("active")){
+    		Toast.makeText(this, "your account is disabled! you must reach out to The True Annunaki!", Toast.LENGTH_LONG).show();
     	}else{
+    		txtUsername.setText("");
+        	txtPassword.setText("");
+    		
     		Toast.makeText(this, "welcome, "+user.firstName+" "+user.lastName+"!", Toast.LENGTH_LONG).show();
     		
     		Bundle bundle = new Bundle();			
