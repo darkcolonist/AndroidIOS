@@ -1,5 +1,6 @@
 package com.xtazy.annunakiholdings.lib;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,7 +20,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
 	// All Static variables
     // Database Version
-    private static final int DATABASE_VERSION = 8;
+    private static final int DATABASE_VERSION = 11;
  
     // Database Name
     private static final String DATABASE_NAME = "dbAnnunakiHoldings";
@@ -59,10 +60,10 @@ public class DBHelper extends SQLiteOpenHelper {
         
         statement = "CREATE TABLE `"+TABLE_TRANSACTIONS+"`("
                 + "`id` INTEGER PRIMARY KEY," 
-                + " `from` INTEGER,"
-                + " `to` INTEGER,"
-                + " `amount` TEXT,"
-                + " `date` TEXT" 
+                + " `uFrom` INTEGER,"
+                + " `uTo` INTEGER,"
+                + " `uAmount` TEXT,"
+                + " `uDate` TEXT" 
                 + ")";
         db.execSQL(statement);
         
@@ -74,7 +75,7 @@ public class DBHelper extends SQLiteOpenHelper {
     	String statement;
     	statement = "INSERT INTO `"+TABLE_USERS+"`"
 		  + " " + columns
-		  + " VALUES('admin', '2016', 'The True', 'Annunaki', 'cris@nms.ph', 'male', 'admin', '-1', 'active');";
+		  + " VALUES('aliens', '2016', 'The True', 'Annunaki', 'cris@nms.ph', 'male', 'admin', '-1', 'active');";
 		db.execSQL(statement);
 		statement = "INSERT INTO `"+TABLE_USERS+"`"
 		  + " " + columns
@@ -157,6 +158,23 @@ public class DBHelper extends SQLiteOpenHelper {
         
         SQLiteDatabase db = this.getWritableDatabase();
     	db.execSQL(statement);
+    }
+    
+    public void updateUser(User user){
+    	String statement = "UPDATE "+TABLE_USERS
+                +" SET"
+                +" `password`='"+user.password+"'"
+                +" ,`firstName`='"+user.firstName+"'"
+                +" ,`lastName`='"+user.lastName+"'"
+                +" ,`email`='"+user.email+"'"
+                +" ,`gender`='"+user.gender+"'"
+                +" ,`role`='"+user.role+"'"
+                +" ,`balance`='"+user.balance+"'"
+                +" ,`status`='"+user.status+"'"
+                +" WHERE `username`='"+user.username+"';";
+        
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.execSQL(statement);
     }
     
     private User fetchUserFromCursor(Cursor cursor){
@@ -313,6 +331,48 @@ public class DBHelper extends SQLiteOpenHelper {
         
         // return contact list
         return usernamesArr;
+    }
+    
+    public void addTransaction(
+    		String from,
+    		String to,
+    		String amount) {
+        SQLiteDatabase db = this.getWritableDatabase();
+     
+        java.util.Date dt = new java.util.Date();
+
+        java.text.SimpleDateFormat sdf = 
+             new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
+        String currentTime = sdf.format(dt);
+        
+        ContentValues values = new ContentValues();
+        values.put("uFrom", from);
+        values.put("uTo", to);
+        values.put("uAmount", amount);
+        values.put("uDate", currentTime);
+     
+        // Inserting Row
+        db.insert(TABLE_TRANSACTIONS, null, values);
+        db.close(); // Closing database connection
+        
+    }
+    
+    public void transferFunds(User from, User to, Double amount){
+    	// compute
+    	from.balance = String.valueOf(Double.parseDouble(from.balance) - amount);
+    	to.balance = String.valueOf(Double.parseDouble(to.balance) + amount);
+    	
+    	// save users
+    	this.updateUser(from);
+    	this.updateUser(to);
+    	
+    	// save transaction
+    	this.addTransaction(
+    			from.username, 
+    			to.username, 
+    			String.valueOf(amount));
+    	
     }
 
 }

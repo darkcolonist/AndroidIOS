@@ -16,7 +16,6 @@ public class LoginActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-    	Log.v("xtazy.message", "login activity!");
     	super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
     }
@@ -56,17 +55,18 @@ public class LoginActivity extends Activity {
     		Toast.makeText(this, "welcome, "+user.firstName+" "+user.lastName+"!", Toast.LENGTH_LONG).show();
     		
     		Bundle bundle = new Bundle();			
-			bundle.putLong("user_id", user.id);
+			bundle.putString("username", user.username);
     		
     		if(user.role.equalsIgnoreCase("admin")){
     			// android.intent.action.ADMIN
     			Intent openActivity = new Intent("android.intent.action.ADMIN");
 				openActivity.putExtras(bundle);
 				startActivity(openActivity);
-				
-				Log.v("xtazy.message", "loading the admin page..?");
     		}else if(user.role.equalsIgnoreCase("user")){
     			// android.intent.action.USER
+    			Intent openActivity = new Intent("android.intent.action.USER");
+				openActivity.putExtras(bundle);
+				startActivity(openActivity);
     		}
     	}
     		

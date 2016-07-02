@@ -8,5 +8,7 @@
     <string name="title_activity_admin_create_user">Create User</string>
     <string name="title_activity_admin_list_users">Users</string>
     <string name="title_activity_admin_edit_user_acivity">View User</string>
+    <string name="title_activity_user">User</string>
+    <string name="title_activity_user_transfer">Transfer Funds</string>
 
 </resources>

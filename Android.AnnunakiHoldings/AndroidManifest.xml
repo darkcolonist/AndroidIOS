@@ -58,6 +58,24 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".UserActivity"
+            android:label="@string/title_activity_user" >
+            <intent-filter>
+                <action android:name="android.intent.action.USER" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".UserTransferActivity"
+            android:label="@string/title_activity_user_transfer" >
+            <intent-filter>
+                <action android:name="android.intent.action.USERTRANSFER" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>
