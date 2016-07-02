@@ -28,6 +28,11 @@ public class DBHelper extends SQLiteOpenHelper {
     private static final String TABLE_USERS = "t_users";
     private static final String TABLE_TRANSACTIONS = "t_transactions";
  
+    /**
+     * raw / native db handler
+     */
+    private SQLiteDatabase rdb;
+    
     public DBHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
@@ -35,6 +40,7 @@ public class DBHelper extends SQLiteOpenHelper {
     // Creating Tables
     @Override
     public void onCreate(SQLiteDatabase db) {
+    	rdb = db;
     	Log.v("xtazy.message", "initialized database schema!");
     	
         String statement = "CREATE TABLE `"+TABLE_USERS+"`("
@@ -127,6 +133,32 @@ public class DBHelper extends SQLiteOpenHelper {
         db.close(); // Closing database connection
     }
     
+    public void updateUser(
+    		String username,
+    		String password,
+    		String firstName,
+    		String lastName,
+    		String email,
+    		String gender,
+    		String role,
+    		String balance,
+    		String status) {
+        String statement = "UPDATE "+TABLE_USERS
+        		+" SET"
+        		+" `password`='"+password+"'"
+        		+" ,`firstName`='"+firstName+"'"
+        		+" ,`lastName`='"+lastName+"'"
+        		+" ,`email`='"+email+"'"
+        		+" ,`gender`='"+gender+"'"
+        		+" ,`role`='"+role+"'"
+        		+" ,`balance`='"+balance+"'"
+        		+" ,`status`='"+status+"'"
+        		+" WHERE `username`='"+username+"';";
+        
+        SQLiteDatabase db = this.getWritableDatabase();
+    	db.execSQL(statement);
+    }
+    
     private User fetchUserFromCursor(Cursor cursor){
     	User user = new User();
     	
@@ -163,6 +195,13 @@ public class DBHelper extends SQLiteOpenHelper {
         }
     	
     	return user;
+    }
+    
+    public void deleteUser(String username){
+    	String statement = "DELETE FROM " + TABLE_USERS 
+				 + " WHERE `username` = '" + username + "';";
+    	SQLiteDatabase db = this.getWritableDatabase();
+    	db.execSQL(statement);
     }
     
     public User getUser(String username, String password){

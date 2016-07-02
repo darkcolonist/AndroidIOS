@@ -7,6 +7,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -17,11 +18,22 @@ import android.widget.Toast;
 public class AdminEditUserAcivity extends Activity {
 
 	String username;
+	DBHelper db;
+	
+	TextView txtUsername;
+	TextView txtPassword;
+	TextView txtFirstName;
+	TextView txtLastName;
+	TextView txtEmail;
+	TextView txtGender;
+	TextView txtBalance;
+	Switch swtStatus;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_admin_edit_user_acivity);
+		db = new DBHelper(this);
 	}
 	
 	@Override
@@ -49,20 +61,18 @@ public class AdminEditUserAcivity extends Activity {
 		
 		Bundle bundle = getIntent().getExtras();
 		
-		this.username = bundle.getString("username");
+		username = bundle.getString("username");
 		
-		DBHelper db = new DBHelper(this);
+		User user = db.getUser(username);
 		
-		User user = db.getUser(this.username);
-		
-		TextView txtUsername = (TextView) findViewById(R.id.txtUsername);
-		TextView txtPassword = (TextView) findViewById(R.id.txtPassword);
-		TextView txtFirstName = (TextView) findViewById(R.id.txtFirstName);
-		TextView txtLastName = (TextView) findViewById(R.id.txtLastName);
-		TextView txtEmail = (TextView) findViewById(R.id.txtEmail);
-		TextView txtGender = (TextView) findViewById(R.id.txtGender);
-		TextView txtBalance = (TextView) findViewById(R.id.txtBalance);
-		Switch swtStatus = (Switch) findViewById(R.id.swtStatus);
+		txtUsername = (TextView) findViewById(R.id.txtUsername);
+		txtPassword = (TextView) findViewById(R.id.txtPassword);
+		txtFirstName = (TextView) findViewById(R.id.txtFirstName);
+		txtLastName = (TextView) findViewById(R.id.txtLastName);
+		txtEmail = (TextView) findViewById(R.id.txtEmail);
+		txtGender = (TextView) findViewById(R.id.txtGender);
+		txtBalance = (TextView) findViewById(R.id.txtBalance);
+		swtStatus = (Switch) findViewById(R.id.swtStatus);
 		
 		txtUsername.setText(user.username);
 		txtPassword.setText(user.password);
@@ -94,6 +104,7 @@ public class AdminEditUserAcivity extends Activity {
 
 		    public void onClick(DialogInterface dialog, int whichButton) {
 		    	// delete user
+		    	db.deleteUser(username);
 		    	
 		    	// then finish this activity
 		    	setResult(RESULT_OK, null);
@@ -104,6 +115,32 @@ public class AdminEditUserAcivity extends Activity {
 	}
 	
 	public void btnSaveClick(View v){
+		txtUsername = (TextView) findViewById(R.id.txtUsername);
+		txtPassword = (TextView) findViewById(R.id.txtPassword);
+		txtFirstName = (TextView) findViewById(R.id.txtFirstName);
+		txtLastName = (TextView) findViewById(R.id.txtLastName);
+		txtEmail = (TextView) findViewById(R.id.txtEmail);
+		txtGender = (TextView) findViewById(R.id.txtGender);
+		txtBalance = (TextView) findViewById(R.id.txtBalance);
+		swtStatus = (Switch) findViewById(R.id.swtStatus);
+
+		String username = txtUsername.getText().toString();
+		String password = txtPassword.getText().toString();
+		String firstName = txtFirstName.getText().toString();
+		String lastName = txtLastName.getText().toString();
+		String email = txtEmail.getText().toString();
+		String gender = txtGender.getText().toString();
+		String balance = txtBalance.getText().toString();
 		
+		String status = "active";
+		if(!swtStatus.isChecked()){
+			status = "inactive";
+		}
+		
+		String role = "user"; // nope, can't change this at this time
+		
+		db.updateUser(username, password, firstName, lastName, email, gender, role, balance, status);
+		
+		Toast.makeText(this, "User: "+username+ " updated!", Toast.LENGTH_SHORT).show();
 	}
 }
