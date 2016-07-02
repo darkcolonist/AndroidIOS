@@ -10,6 +10,7 @@ public class User {
 	public String email;
 	public String gender;
 	public String role; // user, admin
+	public String balance;
 	
 	public User(){
 		// nothing to do here

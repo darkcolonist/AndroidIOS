@@ -5,6 +5,7 @@ import com.xtazy.annunakiholdings.lib.DBHelper;
 import com.xtazy.annunakiholdings.models.User;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -27,16 +28,30 @@ public class LoginActivity extends Activity {
     	String username = txtUsername.getText().toString();
     	String password = txtPassword.getText().toString();
     	
-    	Log.v("xtazy.message", "entered username: "+username);
-    	Log.v("xtazy.message", "entered password: "+password);
-    	
     	DBHelper db = new DBHelper(this);
     	User user = db.getUser(username, password);
+    	
+    	txtUsername.setText("");
+    	txtPassword.setText("");
     	
     	if(user.id == -1){
     		Toast.makeText(this, "invalid login credentials!", Toast.LENGTH_LONG).show();
     	}else{
-    		Toast.makeText(this, "success!", Toast.LENGTH_LONG).show();
+    		Toast.makeText(this, "welcome, "+user.firstName+" "+user.lastName+"!", Toast.LENGTH_LONG).show();
+    		
+    		Bundle bundle = new Bundle();			
+			bundle.putLong("user_id", user.id);
+    		
+    		if(user.role.equalsIgnoreCase("admin")){
+    			// android.intent.action.ADMIN
+    			Intent openActivity = new Intent("android.intent.action.ADMIN");
+				openActivity.putExtras(bundle);
+				startActivity(openActivity);
+				
+				Log.v("xtazy.message", "loading the admin page..?");
+    		}else if(user.role.equalsIgnoreCase("user")){
+    			// android.intent.action.USER
+    		}
     	}
     		
     }

@@ -3,5 +3,8 @@
 
     <string name="app_name">Annunaki Holdings</string>
     <string name="hello_world">Hello world!</string>
+    <string name="title_activity_admin">Admin</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_admin_create_user">Create User</string>
 
 </resources>

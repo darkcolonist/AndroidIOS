@@ -19,7 +19,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
 	// All Static variables
     // Database Version
-    private static final int DATABASE_VERSION = 4;
+    private static final int DATABASE_VERSION = 6;
  
     // Database Name
     private static final String DATABASE_NAME = "dbAnnunakiHoldings";
@@ -35,7 +35,7 @@ public class DBHelper extends SQLiteOpenHelper {
     // Creating Tables
     @Override
     public void onCreate(SQLiteDatabase db) {
-    	Log.v("xtazy.message", "message from dbhelper");
+    	Log.v("xtazy.message", "initialized database schema!");
     	
         String statement = "CREATE TABLE `"+TABLE_USERS+"`("
                 + "`id` INTEGER PRIMARY KEY," 
@@ -45,36 +45,41 @@ public class DBHelper extends SQLiteOpenHelper {
                 + " `lastName` TEXT,"
                 + " `email` TEXT,"
                 + " `gender` TEXT," 
-                + " `role` TEXT)";
+                + " `role` TEXT,"
+                + " `balance` TEXT"
+                + ")";
         db.execSQL(statement);
         
         statement = "CREATE TABLE `"+TABLE_TRANSACTIONS+"`("
                 + "`id` INTEGER PRIMARY KEY," 
                 + " `from` INTEGER,"
                 + " `to` INTEGER,"
-                + " `date` TEXT)";
+                + " `amount` TEXT,"
+                + " `date` TEXT" 
+                + ")";
         db.execSQL(statement);
         
         setupDefaultUsers(db);
     }
  
     private void setupDefaultUsers(SQLiteDatabase db) {
+    	String columns = "(username, password, firstName, lastName, email, gender, role, balance)";
     	String statement;
     	statement = "INSERT INTO `"+TABLE_USERS+"`"
-		  + " (username, password, firstName, lastName, email, gender, role)"
-		  + " VALUES('admin', '2016', 'The True', 'Annunaki', 'cris@nms.ph', 'male', 'admin');";
+		  + " " + columns
+		  + " VALUES('admin', '2016', 'The True', 'Annunaki', 'cris@nms.ph', 'male', 'admin', '-1');";
 		db.execSQL(statement);
 		statement = "INSERT INTO `"+TABLE_USERS+"`"
-		  + " (username, password, firstName, lastName, email, gender, role)"
-		  + " VALUES('acct1', '1122', 'Account 1', 'Holder', 'acct1@mailinator.com', 'male', 'user');";
+		  + " " + columns
+		  + " VALUES('acct1', '1122', 'Account 1', 'Holder', 'acct1@mailinator.com', 'male', 'user', '5000');";
 		db.execSQL(statement);
 		statement = "INSERT INTO `"+TABLE_USERS+"`"
-		  + " (username, password, firstName, lastName, email, gender, role)"
-		  + " VALUES('acct2', '1122', 'Account 2', 'Holder', 'acct2@mailinator.com', 'female', 'user');";
+		  + " " + columns
+		  + " VALUES('acct2', '1122', 'Account 2', 'Holder', 'acct2@mailinator.com', 'female', 'user', '5000');";
 		db.execSQL(statement);
 		statement = "INSERT INTO `"+TABLE_USERS+"`"
-		  + " (username, password, firstName, lastName, email, gender, role)"
-		  + " VALUES('acct3', '1122', 'Account 3', 'Holder', 'acct3@mailinator.com', 'female', 'user');";
+		  + " " + columns
+		  + " VALUES('acct3', '1122', 'Account 3', 'Holder', 'acct3@mailinator.com', 'female', 'user', '5000');";
 		db.execSQL(statement);
 	}
 
@@ -89,21 +94,58 @@ public class DBHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
     
-    public void addProfile(User user) {
+    public void addUser(
+    		String username,
+    		String password,
+    		String firstName,
+    		String lastName,
+    		String email,
+    		String gender,
+    		String role,
+    		String balance) {
         SQLiteDatabase db = this.getWritableDatabase();
      
         ContentValues values = new ContentValues();
-        values.put("username", user.username);
-        values.put("password", user.password);
-        values.put("firstName", user.firstName);
-        values.put("lastName", user.lastName);
-        values.put("email", user.email);
-        values.put("gender", user.gender);
-        values.put("role", user.role);
+        values.put("username", username);
+        values.put("password", password);
+        values.put("firstName", firstName);
+        values.put("lastName", lastName);
+        values.put("email", email);
+        values.put("gender", gender);
+        values.put("role", role);
+        values.put("balance", balance);
      
         // Inserting Row
         db.insert(TABLE_USERS, null, values);
         db.close(); // Closing database connection
+    }
+    
+    public User getUser(String username){
+		User user = new User();
+    	
+    	String statement = "SELECT *"
+    					 + " FROM " + TABLE_USERS 
+    					 + " WHERE `username` = '" + username + "'"
+    					 + " LIMIT 1"
+    					 + ";";
+    	
+    	SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(statement, null);
+        
+        if(cursor.moveToFirst()){
+        	do {
+            	user.id = Integer.parseInt(cursor.getString(0));
+            	user.username = cursor.getString(1);
+            	user.password = cursor.getString(2);
+            	user.firstName = cursor.getString(3);
+            	user.lastName = cursor.getString(4);
+            	user.email = cursor.getString(5);
+            	user.gender = cursor.getString(6);
+            	user.role = cursor.getString(7);
+            } while (cursor.moveToNext());
+        }
+    	
+    	return user;
     }
     
     public User getUser(String username, String password){
@@ -115,9 +157,6 @@ public class DBHelper extends SQLiteOpenHelper {
     					 + "   AND `password` = '" + password + "'"
     					 + " LIMIT 1"
     					 + ";";
-    	
-    	Log.v("xtazy.message", "executing statement:");
-    	Log.v("xtazy.message", statement);
     	
     	SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(statement, null);
