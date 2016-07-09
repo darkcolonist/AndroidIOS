@@ -6,7 +6,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.firebase.client.AuthData;
 import com.firebase.client.Firebase;
+import com.firebase.client.Firebase.AuthResultHandler;
+import com.firebase.client.FirebaseError;
 import com.xtazy.annunakiholdings.models.*;
 
 import android.content.ContentValues;
@@ -46,6 +49,18 @@ public class DBHelper extends SQLiteOpenHelper {
 
         Firebase.setAndroidContext(context);
         firebaseRef = new Firebase(firebase_url);
+
+    	// 9KWZkvMGDUF3Ftcn5tAemIHM36tMQoVIP1MHIdXN
+        firebaseRef.authWithCustomToken("9KWZkvMGDUF3Ftcn5tAemIHM36tMQoVIP1MHIdXN", new AuthResultHandler() {
+            @Override
+            public void onAuthenticationError(FirebaseError error) {
+            	Log.d("xtazy.firebase", "Login Failed! " + error.getMessage());
+            }
+            @Override
+            public void onAuthenticated(AuthData authData) {
+            	Log.d("xtazy.firebase", "Login Succeeded!");
+            }
+        });
     }
     
     private void firebaseSave(String collectionName, String... args){
