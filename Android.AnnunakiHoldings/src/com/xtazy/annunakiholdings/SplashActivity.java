@@ -1,6 +1,7 @@
 package com.xtazy.annunakiholdings;
 
 import com.firebase.client.Firebase;
+import com.xtazy.annunakiholdings.lib.DBHelper;
 import com.xtazy.annunakiholdings.util.SystemUiHider;
 
 import android.app.Activity;
@@ -18,18 +19,13 @@ import android.util.Log;
 public class SplashActivity extends Activity {
 	MediaPlayer splashMusic;
 	
-	protected void firebaseInit(){
-		Firebase.setAndroidContext(this);
-		final Firebase myFirebaseRef = new Firebase("https://annunakiholdings.firebaseio.com/");
-
-		myFirebaseRef.child("launches").setValue("app launch detected ");
-	}
-	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-
-		this.firebaseInit();
+		
+		DBHelper db = new DBHelper(this);
+		
+		db.addLaunchLog();
 		
 		setContentView(R.layout.activity_splash);
 

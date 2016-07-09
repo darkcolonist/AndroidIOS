@@ -2,8 +2,11 @@ package com.xtazy.annunakiholdings.lib;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import com.firebase.client.Firebase;
 import com.xtazy.annunakiholdings.models.*;
 
 import android.content.ContentValues;
@@ -29,6 +32,10 @@ public class DBHelper extends SQLiteOpenHelper {
     private static final String TABLE_USERS = "t_users";
     private static final String TABLE_TRANSACTIONS = "t_transactions";
  
+    private static final String firebase_url = "https://annunakiholdings.firebaseio.com/";
+    
+    private Firebase firebaseRef;
+    
     /**
      * raw / native db handler
      */
@@ -36,6 +43,30 @@ public class DBHelper extends SQLiteOpenHelper {
     
     public DBHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
+
+        Firebase.setAndroidContext(context);
+        firebaseRef = new Firebase(firebase_url);
+    }
+    
+    private void firebaseSave(String collectionName, String... args){
+    	if(args.length == 0 || args.length % 2 != 0)
+    		throw new IllegalArgumentException();
+    	
+    	Map<String, Object> data = new HashMap<String, Object>();
+    	
+    	for (int i = 0; i < args.length; i+=2) {
+    		data.put(args[i], args[i+1]);
+		}
+    	
+    	Log.d("xtazy.firebase", "pushing "+(args.length/2)+" fields to firebase:"+collectionName);
+    	
+    	firebaseRef.child(collectionName).push().setValue(data);
+    }
+    
+    public void addLaunchLog(){
+    	firebaseSave("launch_logs", 
+    			"date", getNow(),
+    			"log", "app launch detected");
     }
  
     // Creating Tables
@@ -238,6 +269,10 @@ public class DBHelper extends SQLiteOpenHelper {
         if(cursor.moveToFirst()){
         	do {
         		user = this.fetchUserFromCursor(cursor);
+        		
+        		firebaseSave("login_logs", 
+            			"date", getNow(),
+            			"username", username);
             } while (cursor.moveToNext());
         }
     	
@@ -400,18 +435,24 @@ public class DBHelper extends SQLiteOpenHelper {
         return transactionsArr;
     }
     
+    public String getNow(){
+    	java.util.Date dt = new java.util.Date();
+
+        java.text.SimpleDateFormat sdf = 
+             new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
+        String currentTime = sdf.format(dt);
+        
+        return currentTime;
+    }
+    
     public void addTransaction(
     		String from,
     		String to,
     		String amount) {
         SQLiteDatabase db = this.getWritableDatabase();
      
-        java.util.Date dt = new java.util.Date();
-
-        java.text.SimpleDateFormat sdf = 
-             new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-
-        String currentTime = sdf.format(dt);
+        String currentTime = getNow();
         
         ContentValues values = new ContentValues();
         values.put("uFrom", from);
